@@ -1,5 +1,5 @@
-
-import React,{useState,useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
+import Button from './Button'
 
 
 import { Icon } from 'react-icons-kit'
@@ -7,6 +7,9 @@ import { Icon } from 'react-icons-kit'
 // import {plus} from 'react-icons-kit/feather/plus'
 import {edit2} from 'react-icons-kit/feather/edit2'
 import {trash} from 'react-icons-kit/feather/trash'
+import TodoForm from './TodoForm'
+import TodoList from './TodoList'
+
 
 
 const getTodosFromLS=()=>{
@@ -19,12 +22,13 @@ const getTodosFromLS=()=>{
     }
 }
 
-export const Form = () => {
+
+
+export const Todo = () => {
 
     
-    const [todoValue, setTodoValue]=useState('');
+     const [todoValue, setTodoValue]=useState('');
 
-    
     const [todos, setTodos]=useState(getTodosFromLS());
     
 
@@ -92,23 +96,51 @@ export const Form = () => {
       setEditForm(false);
       setTodoValue('');
     }
+
+    const handleCheckbox=(id)=>{
+        let todoArray=[];
+        todos.forEach((todo)=>{
+          if(todo.ID===id){
+            if(todo.completed===false){
+              todo.completed=true;
+            }
+            else if(todo.completed===true){
+              todo.completed=false;
+            }
+          }
+          todoArray.push(todo);
+        
+          setTodos(todoArray);
+        })
+      }
+  
+
+
    
    
 
     return (
+        
         <>
-
+        
           {editForm===false&&(
             <div className="form">
               <form autoComplete="off" onSubmit={handleSubmit}>
+
+
+            
+              {/* <Button />  */}
+
                 <div className="input-and-button">
-                  <input type='text' placeholder="Add an Item" 
+                  <input type='text' placeholder="Add an Item" required
                   onChange={(e)=>setTodoValue(e.target.value)} value={todoValue}/>
+
                   <div className='button'>
-                    <button type="submit">Add
-                    </button>
+
+                  <Button   type="submit">Add</Button>
+                    
                   </div>
-                </div>
+                </div> 
               </form>
             </div>
           )}
@@ -119,59 +151,30 @@ export const Form = () => {
 
         
           {editForm===true&&(
-            <div className="form">
-              <form autoComplete="off" onSubmit={handleEditSubmit}>
-                <div className="input-and-button">
-                  <input type='text' placeholder="Edit your Item" required
-                  onChange={(e)=>setTodoValue(e.target.value)} value={todoValue}/>
-                  <div className='button edit'>
-                    <button type="submit">
-                      UPDATE
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+         <TodoForm 
+         setTodoValue={setTodoValue}
+         todoValue={todoValue}
+         handleEditSubmit={handleEditSubmit}
+         />
           )}
           
 
 
-
-          
-
           {todos.length>0&&(
-            <>
-              {todos.map((individualTodo,index)=>(
-                <div className='todo' key={individualTodo.ID}>
-                  <div>
-                      
-                      <span
-                      style={individualTodo.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>{individualTodo.TodoValue}</span>
-                  </div>
-
-                  
-
-                  {editForm===false&&(
-                    <div className='edit-and-delete'>
-                      <div style={{marginRight:7+'px'}}
-                      onClick={()=>handleEdit(individualTodo,index)}>
-                          <Icon icon={edit2} size={18}/>
-                      </div>
-                      <div onClick={()=>handleDelete(individualTodo.ID)}>
-                          <Icon icon={trash} size={18}/>
-                      </div>
-                    </div>
-                  )}
-
-                </div>
-              ))} 
-
-    
-              
-            </>
+            <TodoList
+            handleCheckbox={handleCheckbox}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            todos={todos}
+            edit2={edit2}
+            editForm={editForm}
+            trash={trash}
+            Icon={Icon}
+            />
           )}
           
      
         </>
     )
 }
+export default Todo;
