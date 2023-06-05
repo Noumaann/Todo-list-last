@@ -1,4 +1,4 @@
-*{
+ *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -44,9 +44,9 @@ h3{
   font-size: 16px;
   padding: 5px;
   /* border: 2px solid #f92c0f; */
-}
+} 
 
-.form-and-todo-box .input-and-button .button{
+ .form-and-todo-box .input-and-button .button{
   width: 8%;
   height: 100%;
   background-color: #f92c0f;
@@ -92,4 +92,10 @@ h3{
   display: flex;
   cursor: pointer;
 }
+
+.delete-all{
+  padding: 10px;
+  cursor: pointer;
+} 
+
 

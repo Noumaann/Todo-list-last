@@ -1,7 +1,12 @@
-const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,todos, editForm,})=>{
+
+const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,todos, editForm,Data})=>{
+
     return(
+      
 
         <>
+        
+              
               {todos.map((individualTodo,index)=>(
                 <div className='todo' key={individualTodo.ID}>
 
@@ -12,7 +17,7 @@ const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,to
                       )}
                       
                       <span
-                      style={individualTodo.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>{individualTodo.TodoValue}</span>
+                      style={individualTodo.completed===true?{textDecoration:'line-through'}:{textDecoration:'none'}}>{individualTodo.title}</span>
                   </div>
 
                   {editForm===false&&(
@@ -26,6 +31,8 @@ const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,to
                       </div>
                     </div>
                   )}
+                        
+
 
                 </div>
               ))} 

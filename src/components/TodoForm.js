@@ -1,4 +1,5 @@
 import Button from "./Button";
+
 const TodoForm = ({setTodoValue,todoValue,handleEditSubmit})=>{
   return(
 
@@ -6,6 +7,7 @@ const TodoForm = ({setTodoValue,todoValue,handleEditSubmit})=>{
     <form autoComplete="off" onSubmit={handleEditSubmit}>
       <div className="input-and-button">
         <input type='text' placeholder="Edit your Item" required
+
         onChange={(e)=>setTodoValue(e.target.value)} value={todoValue}/>
         <div className='button edit'>
           
