@@ -1,5 +1,5 @@
 
-const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,todos, editForm,Data})=>{
+const TodoList = ({handleDelete,handleEdit,  Icon,edit2,trash, handleCheckbox,todos, editForm})=>{
 
     return(
       

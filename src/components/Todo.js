@@ -9,6 +9,7 @@ import { edit2 } from 'react-icons-kit/feather/edit2'
 import { trash } from 'react-icons-kit/feather/trash'
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
+import { Link } from 'react-router-dom'
 
 const getTodosFromLS = () => {
   const data = localStorage.getItem('Todos');
@@ -209,8 +210,17 @@ export const Todo = () => {
 
 
   return (
+    
 
     <>
+    <div className='log'>    <Link  to="/">Logout</Link>
+ </div>
+
+       <div className="wrapper">
+      <h3>Todo-listt</h3>
+      <div className="form-and-todo-box">
+      
+     
 
       {editForm === false && (
         <div className="form">
@@ -261,6 +271,8 @@ export const Todo = () => {
         />
       )}
 
+</div>
+</div>
 
     </>
   )

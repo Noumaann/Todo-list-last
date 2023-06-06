@@ -99,3 +99,14 @@ h3{
 } 
 
 
+
+.sty{
+  padding-top: 40px;
+  text-align: center;
+}
+.log{
+  padding-right: 30px;
+  padding-top: 30px;
+  text-align:right;
+
+}

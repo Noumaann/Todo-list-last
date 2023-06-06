@@ -1,28 +1,23 @@
 
- 
+
+import{BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Todo } from "./components/Todo";
+import Login from './components/Login';
 
 
 
 function App() {
 
-
-  
-
   return (
-    <div>
-    <div className="wrapper">
-      <h3>Todo-listt</h3>
-
-       
-      <div className="form-and-todo-box">
-         <Todo />
-       
-
-         </div>
-         
-      </div>
-    </div>
+    <Router>
+      <Routes>
+      
+      <Route  path ="/" element={<Login/>} />
+  
+    
+         <Route exact path ="/Todo" element={<Todo/>} />
+         </Routes>
+    </Router>
   );
 }
 
