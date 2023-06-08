@@ -1,4 +1,4 @@
- *{
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,25 +29,25 @@ h3{
 }
 
 .form-and-todo-box .input-and-button{
-  height: 45px;
+  height: 50px;
   background-color: #fff;
   overflow: hidden;
   display: flex;
 }
 
 .form-and-todo-box .input-and-button input{
-  width: 92%;
+  width: 100%;
   height: 100%;
   outline: none;
   border: none;
-  text-indent: 2px;
-  font-size: 16px;
+  text-indent: 10px;
+  font-size: 17px;
   padding: 5px;
   /* border: 2px solid #f92c0f; */
 } 
 
  .form-and-todo-box .input-and-button .button{
-  width: 8%;
+  width: 15% 0;
   height: 100%;
   background-color: #f92c0f;
   display: flex;
@@ -99,14 +99,59 @@ h3{
 } 
 
 
-
-.sty{
+/* .sty{
   padding-top: 40px;
   text-align: center;
-}
-.log{
-  padding-right: 30px;
-  padding-top: 30px;
-  text-align:right;
+}*/
+.log .last{
+  margin-top: 20px;
+  padding-top: 15px;
+  text-align:center;
+  width: 15%;
+  margin-left: 83%;
+  background-color: rgb(157, 146, 91);
+} 
 
+
+
+
+.Wrap{
+  display: flex;
+  justify-content: center;
+  margin:100px
+}
+form{
+  width :100%;
+  border: 3px solid #dac7c7;
+  border-radius: 5px;
+}
+input[type=text], input[type=password]{
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border:1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+button{
+background-color: #4CAF50;
+color: white;
+padding: 12px 15px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 100%;
+border-radius: 5px;
+}
+button:hover{
+  opacity: 0.8;
+}
+.sty{
+  padding: 16px;
+}
+.Wrap .from-2{
+  width :70%;
+  border: 3px solid #b1a7a7;
 }

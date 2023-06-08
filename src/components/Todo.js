@@ -29,163 +29,199 @@ export const Todo = () => {
 
   const [todos, setTodos] = useState(getTodosFromLS());
 
-  const [myData, setMyData] = useState('');
+  // const [myData, setMyData] = useState('');
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit=(e)=>{
     e.preventDefault();
 
     const date = new Date();
     const time = date.getTime();
 
-    // let todoObject={
-    //   id: time,
+    let todoObject={
+      ID: time,
+      TodoValue:todoValue,
+      completed: false
+    }
 
-    //   title:todoValue,
-    //   completed: false
-    // }
+    setTodos([...todos,todoObject]);
+    setTodoValue('');
+}
 
-    // setTodos([...todos,todoObject]);
-    // setTodoValue('');
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: 'foo',
-        body: 'bar',
-        userId: 1,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
+  //   const date = new Date();
+  //   const time = date.getTime();
+      
+  //    }
 
-        let book = data.title
-        setMyData(data.title);
+  //   let todoObject={
+  //     id: time,
 
-        if (todoValue) {
-          book = todoValue
-        }
-        else {
-          book = data.title
-        }
-        let todoObject = {
-          id: time,
-          title: book,
-          completed: false
-        }
+  //     title:todoValue,
+  //     completed: false
+  //   }
 
-        setTodos([...todos, todoObject]);
-        setTodoValue('');
-        console.log(data);
-      })
+  //   setTodos([...todos,todoObject]);
+  //   setTodoValue('');
+  // }
 
-      .catch(error => {
-        let todoObject = {
-          id: time,
-          title: todoValue,
-          completed: false
-        }
+  //   fetch('https://jsonplaceholder.typicode.com/posts', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       title: 'foo',
+  //       body: 'bar',
+  //       userId: 1,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
 
-        setTodos([...todos, todoObject]);
-        setTodoValue('');
-      });
-  }
+  //       let book = data.title
+  //       setMyData(data.title);
+
+  //       if (todoValue) {
+  //         book = todoValue
+  //       }
+  //       else {
+  //         book = data.title
+  //       }
+  //       let todoObject = {
+  //         id: time,
+  //         title: book,
+  //         completed: false
+  //       }
+
+  //       setTodos([...todos, todoObject]);
+  //       setTodoValue('');
+  //       console.log(data);
+  //     })
+
+  //     .catch(error => {
+  //       let todoObject = {
+  //         id: time,
+  //         title: todoValue,
+  //         completed: false
+  //       }
+
+  //       setTodos([...todos, todoObject]);
+  //       setTodoValue('');
+  //     });
+  // }
 
 
   //get
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users/1/todos')
-      .then((response) => response.json())
-      .then((json) => setTodos(json));
+  // useEffect(() => {
+  //   fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+  //     .then((response) => response.json())
+  //     .then((json) => setTodos(json));
 
-  }, [])
+  // }, [])
 
 
   useEffect(() => {
     localStorage.setItem('Todos', JSON.stringify(todos));
   }, [todos])
 
-
-
-  const handleDelete = (todo, index) => {
-    console.log(todo)
-    fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
-      method: 'DELETE',
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('item deleted successfully');
-          let deletedItemIndex = todos.findIndex(i => i.id == todo.id)
-          let delete_todo = [...todos];
-          delete_todo.splice(deletedItemIndex,1)
-          setTodos(delete_todo);
-        } else {
-          console.log('unable to delete')
-        }
-      })
-      .catch(error => {
-
-
-      });
+  
+  const handleDelete=(id)=>{
+    const filtered = todos.filter((todo)=>{
+      return todo.ID!==id
+    });
+    setTodos(filtered);
   }
 
-
-
+  // const handleDelete = (todo, index) => {
+  //   console.log(todo)
+  //   fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
+  //     method: 'DELETE',
+  //   })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         console.log('item deleted successfully');
+  //         let deletedItemIndex = todos.findIndex(i => i.id == todo.id)
+  //         let delete_todo = [...todos];
+  //         delete_todo.splice(deletedItemIndex,1)
+  //         setTodos(delete_todo);
+  //       } else {
+  //         console.log('unable to delete')
+  //       }
+  //     })
+  //     .catch(error => {
+  //     });
+  // }
 
   const [editForm, setEditForm] = useState(false);
 
-
   const [id, setId] = useState();
 
-
-  const handleEdit = (todo, index) => {
+  const handleEdit=(todo,index)=>{
     setEditForm(true);
-    setTodoValue(todo.title);
-    setId(todo.id);
+    setTodoValue(todo.TodoValue);
+    setId(index);
   }
+  // const handleEdit = (todo, index) => {
+  //   setEditForm(true);
+  //   setTodoValue(todo.title);
+  //   setId(todo.id);
+  // }
 
 
-
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit=(e)=>{
     e.preventDefault();
-    console.log(id)
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id,
-        title: todoValue,
-        body: '',
-        userId: 1
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json)
-        console.log(todos)
-        console.log(id)
-        let items = [...todos];
 
-        let item = items.filter(i => i.id == json.id);
-        console.log(item)
-        item.title = json.title;
-        item.completed = false;
+    let items = [...todos];
 
-        let updateItemIndex = items.findIndex(i => i.id == json.id)
-        items[updateItemIndex] = item;
-
-        setTodos(items);
-        setEditForm(false);
-        setTodoValue('');
-      });
-
+    let item = items[id];
+  
+    item.TodoValue=todoValue;
+    item.completed=false;
+  
+    items[id]=item;
+    
+    setTodos(items);
+    setEditForm(false);
+    setTodoValue('');
   }
+ 
+  // const handleEditSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(id)
+  //   // fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+  //   //   method: 'PUT',
+  //   //   headers: { 'Content-Type': 'application/json' },
+  //   //   body: JSON.stringify({
+  //   //     id,
+  //   //     title: todoValue,
+  //   //     body: '',
+  //   //     userId: 1
+  //   //   }),
+  //   // })
+  //   //   .then((response) => response.json())
+  //   //   .then((json) => {
+  //   //     console.log(json)
+  //   //     console.log(todos)
+  //   //     console.log(id)
+  //   //     let items = [...todos];
 
+  //   //     let item = items.filter(i => i.id == json.id);
+  //   //     console.log(item)
+  //   //     item.title = json.title;
+  //   //     item.completed = false;
 
+  //   //     let updateItemIndex = items.findIndex(i => i.id == json.id)
+  //   //     items[updateItemIndex] = item;
 
+  //   //     setTodos(items);
+  //   //     setEditForm(false);
+  //   //     setTodoValue('');
+  //   //   });
+
+  // }
 
   const handleCheckbox = (id) => {
     let todoArray = [];
@@ -204,36 +240,31 @@ export const Todo = () => {
     })
   }
 
-
-
-
-
-
   return (
     
 
     <>
-    <div className='log'>    <Link  to="/">Logout</Link>
- </div>
+    <div className='log'>  
+    <button className='last' >  <Link  to="/">Logout</Link></button>
+    </div>
 
        <div className="wrapper">
       <h3>Todo-listt</h3>
       <div className="form-and-todo-box">
       
-     
 
       {editForm === false && (
         <div className="form">
           <form autoComplete="off" onSubmit={handleSubmit}>
-            {
+            {/* {
               post => <div key={post.id}>{post.title}</div>
-            }
+            } */}
 
             <div className="input-and-button">
-              <input type='text' placeholder="Add an Item"
+              <input type='text' placeholder="Add an Item" required
                 onChange={(e) => setTodoValue(e.target.value)} value={todoValue} />
 
-              <div className='button'>
+              <div className='buttonn'>
 
                 <Button type="submit">Add</Button>
 
@@ -244,10 +275,6 @@ export const Todo = () => {
       )}
 
 
-
-
-
-
       {editForm === true && (
         <TodoForm
           setTodoValue={setTodoValue}
@@ -255,8 +282,6 @@ export const Todo = () => {
           handleEditSubmit={handleEditSubmit}
         />
       )}
-
-
 
       {todos.length > 0 && (
         <TodoList
