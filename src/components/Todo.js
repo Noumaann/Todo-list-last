@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
 
 import { Icon } from "react-icons-kit";
 
@@ -233,7 +232,7 @@ export const Todo = () => {
 
   const logout = () => {
     localStorage.removeItem("user");
-    history("/");
+    history("/login");
   };
 
   return (
@@ -244,55 +243,26 @@ export const Todo = () => {
         </button>
       </div>
 
-      <div className="wrapper">
-        <h3>Todo-listt</h3>
-        <div className="form-and-todo-box">
-          {editForm === false && (
-            <div className="form">
-              <form autoComplete="off" onSubmit={handleSubmit}>
-                {/* {
-              post => <div key={post.id}>{post.title}</div>
-            } */}
+      <TodoForm
+        setTodoValue={setTodoValue}
+        todoValue={todoValue}
+        handleEditSubmit={handleEditSubmit}
+        handleSubmit={handleSubmit}
+        editForm={editForm}
+      />
 
-                <div className="input-and-button">
-                  <input
-                    type="text"
-                    placeholder="Add an Item"
-                    required
-                    onChange={(e) => setTodoValue(e.target.value)}
-                    value={todoValue}
-                  />
-
-                  <div className="buttonn">
-                    <Button type="submit">Add</Button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          )}
-
-          {editForm === true && (
-            <TodoForm
-              setTodoValue={setTodoValue}
-              todoValue={todoValue}
-              handleEditSubmit={handleEditSubmit}
-            />
-          )}
-
-          {todos.length > 0 && (
-            <TodoList
-              handleCheckbox={handleCheckbox}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              todos={todos}
-              edit2={edit2}
-              editForm={editForm}
-              trash={trash}
-              Icon={Icon}
-            />
-          )}
-        </div>
-      </div>
+      {todos.length > 0 && (
+        <TodoList
+          handleCheckbox={handleCheckbox}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          todos={todos}
+          edit2={edit2}
+          editForm={editForm}
+          trash={trash}
+          Icon={Icon}
+        />
+      )}
     </>
   );
 };

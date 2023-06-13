@@ -4,13 +4,13 @@ const Validation = (values) => {
 
   if (!values.name) {
     errors.name = "User Name Required";
-  } else if (values.name !== "Admin") {
+  } else if (values.name !== "admin") {
     // errors.name = "Invalid UserName or Password";
   }
 
   if (!values.password) {
     errors.password = "Password Required";
-  } else if (values.password !== "admin" || values.name !== "Admin") {
+  } else if (values.password !== "admin" || values.name !== "admin") {
     errors.password = "Invalid UserName or Password ";
   }
   if (errors.name || errors.password) {

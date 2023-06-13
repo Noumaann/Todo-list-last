@@ -40,10 +40,10 @@ h3{
   height: 100%;
   outline: none;
   border: none;
-  text-indent: 10px;
+  text-indent: 20px;
   font-size: 17px;
   padding: 5px;
-  /* border: 2px solid #f92c0f; */
+   /* border: 2px solid #f92c0f;  */
 } 
 
  .form-and-todo-box .input-and-button .button{
@@ -70,13 +70,18 @@ h3{
 }
 
 .todo{
-  margin: 15px 0px;
+  width: 500px;
+  margin: auto;
+  height: auto;
+  /* margin: 15px 0px; */
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid;
   padding-bottom: 5px;
+  
+  
 }
 
 .todo input{
@@ -86,6 +91,10 @@ h3{
 .todo span{
   font-size: 14px;
   font-weight: 600;
+  
+
+  
+
 }
 
 .todo .edit-and-delete{
@@ -93,10 +102,10 @@ h3{
   cursor: pointer;
 }
 
-.delete-all{
+/* .delete-all{
   padding: 10px;
   cursor: pointer;
-} 
+}  */
 
 
 /* .sty{

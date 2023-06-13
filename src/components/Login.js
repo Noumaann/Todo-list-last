@@ -24,7 +24,7 @@ function Login() {
     let result = validation(values);
 
     if (result && result.success === true) {
-      history("/Todo");
+      history("/todo");
     } else {
       if (
         result.name === "Invalid UserName or Password" &&
@@ -36,6 +36,10 @@ function Login() {
       }
     }
   }
+  const login = () => {
+    localStorage.removeItem("user");
+    history("/login");
+  };
 
   return (
     <div className="Wrap">
@@ -73,7 +77,9 @@ function Login() {
             <p style={{ color: "red", fontSize: "12px" }}>{errors.password}</p>
           )}
 
-          <button type="submit">Login</button>
+          <button type="submit" onClick={login}>
+            Login
+          </button>
         </div>
       </form>
     </div>

@@ -13,7 +13,7 @@ const TodoList = ({
       {todos.map((individualTodo, index) => (
         <div className="todo" key={individualTodo.ID}>
           <div>
-            {editForm === false && (
+            {!editForm && (
               <input
                 type="checkbox"
                 checked={individualTodo.completed}
@@ -33,7 +33,7 @@ const TodoList = ({
             </span>
           </div>
 
-          {editForm === false && (
+          {!editForm && (
             <div className="edit-and-delete">
               <div
                 style={{ marginRight: 7 + "px" }}

@@ -4,6 +4,6 @@ const Guard = () => {
   let user = JSON.parse(localStorage.getItem("user"));
   let isLogin = user && user.name;
 
-  return isLogin ? <Outlet /> : <Navigate to="/" />;
+  return isLogin ? <Outlet /> : <Navigate to="/login" />;
 };
 export default Guard;
